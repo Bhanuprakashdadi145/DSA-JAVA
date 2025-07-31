@@ -1,18 +1,25 @@
 class Solution {
     public int minimumRecolors(String blocks, int k) {
-        int mini=Integer.MAX_VALUE;
-        int n=blocks.length();
-        int i=0;
-        while(i<=n-k){
-             String str=blocks.substring(i,k+i);
-             System.out.println(str);
-             int count=0;
-             for(char ch:str.toCharArray()){
-                if(ch=='W') count++;
-             }
-             mini=Math.min(mini, count);
-             i++;
+      int mini=Integer.MAX_VALUE;
+      int left=0;
+      int right=k;
+      int w=0;
+      for(int i=0;i<k;i++){
+        if(blocks.charAt(i)=='W'){
+            w++;
         }
-        return mini;
+      } 
+      System.out.println(w);
+      mini=w;
+      while(right<blocks.length()){
+          if(blocks.charAt(left)=='W'){
+            w--; 
+          }
+          if(blocks.charAt(right)=='W') w++;
+          mini=Math.min(mini, w);
+          left++;
+          right++;
+      }
+      return mini;
     }
 }
